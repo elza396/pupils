@@ -2,34 +2,44 @@
 using namespace std;
 
 int main() {
-    int N;
-    cout << "Enter number of pupils:" << "\t";
-    cin >> N;
+    class Planet {
+    public:
+        float weight;
+        string name;
 
-    struct Pupil {
-        string surname;
-        int school = 0;
-        int grade = 1;
+        Planet(string planetName, float planetWeight) {
+            name = planetName;
+            weight =  planetWeight;
+        }
     };
-    Pupil pupils[N];
 
-    for (int i = 0; i < N; i++) {
-        Pupil pupil;
-        cout << "Pupil "<< i+1 << "'s name: " << "\t";
-        cin >> pupil.surname;
-        cout << "Enter school: " << "\t";
-        cin >> pupil.school;
-        cout << "Enter grade: " << "\t";
-        cin >> pupil.grade;
+    const int n = 8;
 
-        pupils[i] = pupil;
-    }
+    Planet planets[n] = {
+            Planet("Земля", 5.972E24),
+            Planet("Уран", 8.681E25),
+            Planet("Венера", 4.867E24),
+            Planet("Нептун", 1.024E26),
+            Planet("Марс", 6.39E23),
+            Planet("Юпитер", 1.898E27),
+            Planet("Меркурий", 3.285E23),
+            Planet("Сатурн", 5.683E26),
+    };
 
-    cout <<endl<<"\t"<<"Pupils in 49 or 90 schools in 5 or 6 grades: ";
-    for (int i = 0; i < N; i++) {
-        if ((pupils[i].school == 49 || pupils[i].school == 90) && (pupils[i].grade == 5 || pupils[i].grade == 6)) {
-            cout <<endl<< pupils[i].surname;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if(planets[j].weight > planets[j + 1].weight) {
+                Planet temp =  planets[j];
+                planets[j] = planets[j + 1];
+                planets[j + 1] = temp;
+            }
         }
     }
+
+    cout << "Планеты солнечной системы (отсортированные):" << endl;
+    for (int k = 0; k < n; k++) {
+        cout << planets[k].name << "\t" << planets[k].weight <<endl;
+    }
+
     return 0;
 }
