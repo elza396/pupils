@@ -36,6 +36,7 @@ public:
     }
 };
 
+
 int main() {
     Salary ivan("developer", 30000, 10000, 13);
     ivan.showBaseSalary();
